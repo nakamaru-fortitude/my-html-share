@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM/SFA Intelligence Model - ER Diagram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; }
+        .rx-t-lg { border-top-left-radius: 10px; border-top-right-radius: 10px; }
+        /* SVGを親要素の幅いっぱいに広げ、アスペクト比を維持するための設定 */
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 p-4 md:p-10">
+    <!-- コンテナの幅制限を調整（全体が見えるように最大幅を広げるか、柔軟に設定） -->
+    <div class="max-w-[1600px] mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-300">
+        <!-- Header -->
+        <div class="bg-slate-900 p-6 md:p-8 text-white">
+            <div class="flex flex-col md:flex-row justify-between items-end gap-4">
+                <div>
+                    <div class="flex flex-wrap items-center gap-2 mb-3">
+                        <span class="bg-orange-600 text-white px-3 py-1 rounded-md text-sm font-bold">HS</span>
+                        <span class="bg-blue-600 text-white px-3 py-1 rounded-md text-sm font-bold">SF</span>
+                        <span class="bg-cyan-600 text-white px-3 py-1 rounded-md text-sm font-bold">SP</span>
+                        <span class="bg-purple-600 text-white px-3 py-1 rounded-md text-sm font-bold">DB</span>
+                        <h1 class="text-xl md:text-3xl font-bold tracking-tight ml-2 uppercase">CRM/SFA Intelligence Architecture</h1>
+                    </div>
+                    <p class="text-slate-400 text-sm md:text-base font-medium">
+                        HubSpot × Salesforce × SPEEDA × Databricks 完全統合モデル
+                    </p>
+                </div>
+                <div class="text-right border-l border-slate-700 pl-6 hidden md:block">
+                    <p class="text-[11px] text-slate-500 font-mono italic text-right">Unified Data Intelligence Layer</p>
+                    <p class="text-sm text-slate-400 font-bold text-right text-nowrap">Ver. 10.2 Responsive Edition</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SVG ER Diagram Container -->
+        <!-- overflow-x-autoを維持しつつ、SVG側で幅を100%に調整 -->
+        <div class="p-2 md:p-8 bg-white overflow-hidden">
+            <svg viewBox="0 0 1450 1100" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                    <marker id="many" viewBox="0 0 20 20" refX="10" refY="10" markerWidth="8" markerHeight="8" orient="auto">
+                        <path d="M 0 4 L 10 10 L 0 16" fill="none" stroke="#64748b" stroke-width="1.5" />
+                    </marker>
+                    <marker id="one" viewBox="0 0 20 20" refX="10" refY="10" markerWidth="8" markerHeight="8" orient="auto">
+                        <path d="M 10 4 L 10 16" fill="none" stroke="#64748b" stroke-width="1.5" />
+                    </marker>
+                </defs>
+
+                <!-- SPEEDA -->
+                <g transform="translate(20, 60)">
+                    <rect width="250" height="210" fill="white" stroke="#1e293b" stroke-width="2" rx="10" />
+                    <rect width="250" height="45" fill="#0e7490" rx="10" class="rx-t-lg" />
+                    <text x="125" y="28" text-anchor="middle" fill="white" font-weight="bold" font-size="15">SPEEDA (外部データ)</text>
+                    <g transform="translate(165, -12)">
+                        <rect width="75" height="22" rx="6" fill="white" stroke="#94a3b8" stroke-width="1" />
+                        <text x="37.5" y="15" text-anchor="middle" fill="#475569" font-weight="bold" font-size="10">External</text>
+                    </g>
+                    <text x="15" y="75" fill="#1e293b" font-weight="medium" font-size="13">🔑 SPEEDA企業ID</text>
+                    <text x="15" y="99" fill="#1e293b" font-weight="medium" font-size="13">   財務諸表 / 業界統計</text>
+                    <text x="15" y="123" fill="#1e293b" font-weight="medium" font-size="13">   競合他社リスト</text>
+                    <text x="15" y="147" fill="#1e293b" font-weight="medium" font-size="13">   人事異動 / ニュース</text>
+                </g>
+
+                <!-- Campaign -->
+                <g transform="translate(320, 60)">
+                    <rect width="250" height="200" fill="white" stroke="#1e293b" stroke-width="2" rx="10" />
+                    <rect width="250" height="45" fill="#ea580c" rx="10" class="rx-t-lg" />
+                    <text x="125" y="28" text-anchor="middle" fill="white" font-weight="bold" font-size="15">キャンペーン</text>
+                    <g transform="translate(165, -12)">
+                        <rect width="75" height="22" rx="6" fill="white" stroke="#94a3b8" stroke-width="1" />
+                        <text x="37.5" y="15" text-anchor="middle" fill="#475569" font-weight="bold" font-size="10">HubSpot</text>
+                    </g>
+                    <text x="15" y="75" fill="#1e293b" font-weight="medium" font-size="13">🔑 キャンペーンID</text>
+                    <text x="15" y="99" fill="#1e293b" font-weight="medium" font-size="13">   名称 / 施策タイプ</text>
+                    <text x="15" y="123" fill="#1e293b" font-weight="medium" font-size="13">   対象製品カテゴリ</text>
+                </g>
+
+                <!-- Lead -->
+                <g transform="translate(320, 380)">
+                    <rect width="250" height="250" fill="white" stroke="#1e293b" stroke-width="2" rx="10" />
+                    <rect width="250" height="45" fill="#ea580c" rx="10" class="rx-t-lg" />
+                    <text x="125" y="28" text-anchor="middle" fill="white" font-weight="bold" font-size="15">リード (個客原石)</text>
+                    <g transform="translate(165, -12)">
+                        <rect width="75" height="22" rx="6" fill="white" stroke="#94a3b8" stroke-width="1" />
+                        <text x="37.5" y="15" text-anchor="middle" fill="#475569" font-weight="bold" font-size="10">HubSpot</text>
+                    </g>
+                    <text x="15" y="75" fill="#1e293b" font-weight="medium" font-size="13">🔑 リードID</text>
+                    <text x="15" y="99" fill="#1e293b" font-weight="medium" font-size="13">   氏名 / 会社名</text>
+                    <text x="15" y="123" fill="#1d4ed8" font-weight="bold" font-size="13">   行動スコアリング</text>
+                    <text x="15" y="147" fill="#1d4ed8" font-weight="bold" font-size="13">   AI有望度 (Databricks)</text>
+                    <text x="15" y="171" fill="#1e293b" font-weight="medium" font-size="13">   SPEEDA企業ID (FK)</text>
+                </g>
+
+                <!-- Contact -->
+                <g transform="translate(720, 60)">
+                    <rect width="250" height="250" fill="white" stroke="#1e293b" stroke-width="2" rx="10" />
+                    <rect width="250" height="45" fill="#1d4ed8" rx="10" class="rx-t-lg" />
+                    <text x="125" y="28" text-anchor="middle" fill="white" font-weight="bold" font-size="15">取引先責任者</text>
+                    <g transform="translate(165, -12)">
+                        <rect width="75" height="22" rx="6" fill="white" stroke="#94a3b8" stroke-width="1" />
+                        <text x="37.5" y="15" text-anchor="middle" fill="#475569" font-weight="bold" font-size="10">SF / HS</text>
+                    </g>
+                    <text x="15" y="75" fill="#1e293b" font-weight="medium" font-size="13">🔑 責任者ID</text>
+                    <text x="15" y="99" fill="#1e293b" font-weight="medium" font-size="13">   氏名 / メール</text>
+                    <text x="15" y="123" fill="#1e293b" font-weight="medium" font-size="13">   所属取引先ID (FK)</text>
+                    <text x="15" y="147" fill="#1e293b" font-weight="medium" font-size="13">   興味タグ (MA同期)</text>
+                    <text x="15" y="171" fill="#1e293b" font-weight="medium" font-size="13">   最終活動日</text>
+                </g>
+
+                <!-- Account -->
+                <g transform="translate(720, 380)">
+                    <rect width="250" height="260" fill="white" stroke="#1e293b" stroke-width="2" rx="10" />
+                    <rect width="250" height="45" fill="#1e40af" rx="10" class="rx-t-lg" />
+                    <text x="125" y="28" text-anchor="middle" fill="white" font-weight="bold" font-size="15">取引先 (マスター)</text>
+                    <g transform="translate(165, -12)">
+                        <rect width="75" height="22" rx="6" fill="white" stroke="#94a3b8" stroke-width="1" />
+                        <text x="37.5" y="15" text-anchor="middle" fill="#475569" font-weight="bold" font-size="10">Salesforce</text>
+                    </g>
+                    <text x="15" y="75" fill="#1e293b" font-weight="medium" font-size="13">🔑 取引先ID</text>
+                    <text x="15" y="99" fill="#1e293b" font-weight="medium" font-size="13">   正式名称 / 業種</text>
+                    <text x="15" y="123" fill="#1d4ed8" font-weight="bold" font-size="13">   外部財務情報 (SPEEDA)</text>
+                    <text x="15" y="147" fill="#1d4ed8" font-weight="bold" font-size="13">   LTV予測 (Databricks)</text>
+                    <text x="15" y="171" fill="#1e293b" font-weight="medium" font-size="13">   取引区分 (見込/既存)</text>
+                    <text x="15" y="195" fill="#1e293b" font-weight="medium" font-size="13">   導入済み製品群</text>
+                </g>
+
+                <!-- Project Member -->
+                <g transform="translate(720, 700)">
+                    <rect width="250" height="180" fill="white" stroke="#1e293b" stroke-width="2" rx="10" />
+                    <rect width="250" height="45" fill="#6366f1" rx="10" class="rx-t-lg" />
+                    <text x="125" y="28" text-anchor="middle" fill="white" font-weight="bold" font-size="15">案件関係者 (Role)</text>
+                    <g transform="translate(165, -12)">
+                        <rect width="75" height="22" rx="6" fill="white" stroke="#94a3b8" stroke-width="1" />
+                        <text x="37.5" y="15" text-anchor="middle" fill="#475569" font-weight="bold" font-size="10">Salesforce</text>
+                    </g>
+                    <text x="15" y="75" fill="#1e293b" font-weight="medium" font-size="13">🔑 関係者ID</text>
+                    <text x="15" y="99" fill="#1e293b" font-weight="medium" font-size="13">   案件ID (FK)</text>
+                    <text x="15" y="123" fill="#1e293b" font-weight="medium" font-size="13">   責任者ID (FK)</text>
+                    <text x="15" y="147" fill="#1d4ed8" font-weight="bold" font-size="13">   役割 (決裁/推進等)</text>
+                </g>
+
+                <!-- Project -->
+                <g transform="translate(1150, 380)">
+                    <rect width="250" height="260" fill="white" stroke="#1e293b" stroke-width="2" rx="10" />
+                    <rect width="250" height="45" fill="#3730a3" rx="10" class="rx-t-lg" />
+                    <text x="125" y="28" text-anchor="middle" fill="white" font-weight="bold" font-size="15">案件 (Project)</text>
+                    <g transform="translate(165, -12)">
+                        <rect width="75" height="22" rx="6" fill="white" stroke="#94a3b8" stroke-width="1" />
+                        <text x="37.5" y="15" text-anchor="middle" fill="#475569" font-weight="bold" font-size="10">Salesforce</text>
+                    </g>
+                    <text x="15" y="75" fill="#1e293b" font-weight="medium" font-size="13">🔑 案件ID</text>
+                    <text x="15" y="99" fill="#1e293b" font-weight="medium" font-size="13">   案件名 / フェーズ</text>
+                    <text x="15" y="123" fill="#1d4ed8" font-weight="bold" font-size="13">   成約予測確度 (DB)</text>
+                    <text x="15" y="147" fill="#1e293b" font-weight="medium" font-size="13">   見込金額 / 完了予定日</text>
+                    <text x="15" y="171" fill="#1e293b" font-weight="medium" font-size="13">   失注理由 / 競合</text>
+                    <text x="15" y="195" fill="#1e293b" font-weight="medium" font-size="13">   取引先ID (FK)</text>
+                </g>
+
+                <!-- Negotiation -->
+                <g transform="translate(1150, 60)">
+                    <rect width="250" height="230" fill="white" stroke="#1e293b" stroke-width="2" rx="10" />
+                    <rect width="250" height="45" fill="#d97706" rx="10" class="rx-t-lg" />
+                    <text x="125" y="28" text-anchor="middle" fill="white" font-weight="bold" font-size="15">商談 (活動記録)</text>
+                    <g transform="translate(165, -12)">
+                        <rect width="75" height="22" rx="6" fill="white" stroke="#94a3b8" stroke-width="1" />
+                        <text x="37.5" y="15" text-anchor="middle" fill="#475569" font-weight="bold" font-size="10">Salesforce</text>
+                    </g>
+                    <text x="15" y="75" fill="#1e293b" font-weight="medium" font-size="13">🔑 商談ID</text>
+                    <text x="15" y="99" fill="#1e293b" font-weight="medium" font-size="13">   接触種別 / 内容</text>
+                    <text x="15" y="123" fill="#1d4ed8" font-weight="bold" font-size="13">   感情分析 (Databricks)</text>
+                    <text x="15" y="147" fill="#1e293b" font-weight="medium" font-size="13">   ネクストアクション</text>
+                    <text x="15" y="171" fill="#1e293b" font-weight="medium" font-size="13">   関連案件ID (FK)</text>
+                </g>
+
+                <!-- Databricks -->
+                <g transform="translate(1150, 700)">
+                    <rect width="250" height="230" fill="white" stroke="#1e293b" stroke-width="2" rx="10" />
+                    <rect width="250" height="45" fill="#7e22ce" rx="10" class="rx-t-lg" />
+                    <text x="125" y="28" text-anchor="middle" fill="white" font-weight="bold" font-size="15">Databricks (AI分析)</text>
+                    <g transform="translate(165, -12)">
+                        <rect width="75" height="22" rx="6" fill="white" stroke="#94a3b8" stroke-width="1" />
+                        <text x="37.5" y="15" text-anchor="middle" fill="#475569" font-weight="bold" font-size="10">Intelligence</text>
+                    </g>
+                    <text x="15" y="75" fill="#1e293b" font-weight="medium" font-size="13">🔑 予測モデルID</text>
+                    <text x="15" y="99" fill="#1e293b" font-weight="medium" font-size="13">   スコアリングロジック</text>
+                    <text x="15" y="123" fill="#1e293b" font-weight="medium" font-size="13">   解約予測モデル</text>
+                    <text x="15" y="147" fill="#1e293b" font-weight="medium" font-size="13">   NBAエンジン</text>
+                    <text x="15" y="171" fill="#1e293b" font-weight="medium" font-size="13">   統合データレイク</text>
+                </g>
+
+                <!-- Product -->
+                <g transform="translate(20, 700)">
+                    <rect width="250" height="160" fill="white" stroke="#1e293b" stroke-width="2" rx="10" />
+                    <rect width="250" height="45" fill="#15803d" rx="10" class="rx-t-lg" />
+                    <text x="125" y="28" text-anchor="middle" fill="white" font-weight="bold" font-size="15">商品 (Product)</text>
+                    <g transform="translate(165, -12)">
+                        <rect width="75" height="22" rx="6" fill="white" stroke="#94a3b8" stroke-width="1" />
+                        <text x="37.5" y="15" text-anchor="middle" fill="#475569" font-weight="bold" font-size="10">Salesforce</text>
+                    </g>
+                    <text x="15" y="75" fill="#1e293b" font-weight="medium" font-size="13">🔑 商品ID</text>
+                    <text x="15" y="99" fill="#1e293b" font-weight="medium" font-size="13">   商品名 / カテゴリ</text>
+                    <text x="15" y="123" fill="#1d4ed8" font-weight="bold" font-size="13">   クロスセル推奨品</text>
+                </g>
+
+                <!-- Relationship Lines -->
+                <g stroke="#94a3b8" fill="none" stroke-width="1.5">
+                    <!-- Campaign -> Lead -->
+                    <path d="M 445 260 L 445 380" marker-end="url(#many)" />
+                    <text x="455" y="320" fill="#dc2626" font-size="14">獲得(LeadGen)</text>
+
+                    <!-- SPEEDA -> Lead/Account -->
+                    <path d="M 145 270 L 145 440 L 320 440" stroke="#0891b2" stroke-dasharray="5,2" />
+                    <text x="160" y="430" fill="#dc2626" font-size="14">ターゲット供給</text>
+                    <path d="M 270 165 L 720 165" stroke="#0891b2" stroke-dasharray="5,2" />
+                    <text x="500" y="155" fill="#dc2626" font-size="14">企業財務エンリッチ</text>
+
+                    <!-- Lead -> Account -->
+                    <path d="M 570 505 L 720 505" stroke="#f97316" stroke-dasharray="5,3" marker-end="url(#one)" />
+                    <text x="600" y="495" fill="#dc2626" font-size="14">昇格(Sync)</text>
+
+                    <!-- Databricks Lines -->
+                    <path d="M 1150 815 L 970 815" stroke="#9333ea" stroke-dasharray="5,2" />
+                    <text x="1000" y="805" fill="#dc2626" font-size="14">LTV予測・解約検知</text>
+                    
+                    <path d="M 1275 700 L 1275 640" stroke="#9333ea" stroke-dasharray="5,2" marker-end="url(#one)" />
+                    <text x="1285" y="680" fill="#dc2626" font-size="14">成約確率算出</text>
+
+                    <path d="M 1400 380 L 1400 290" stroke="#9333ea" stroke-dasharray="5,2" marker-end="url(#one)" />
+                    <text x="1405" y="340" fill="#dc2626" font-size="14">NLP感情分析</text>
+
+                    <!-- Account -> Project -->
+                    <line x1="970" y1="510" x2="1150" y2="510" marker-end="url(#many)" stroke="#94a3b8" />
+                    
+                    <!-- Contact -> Project Member -->
+                    <path d="M 845 270 L 845 700" stroke="#6366f1" marker-end="url(#many)" />
+
+                    <!-- Project -> Project Member -->
+                    <path d="M 1150 510 Q 1000 580 970 700" stroke="#6366f1" marker-end="url(#many)" />
+                    <text x="1020" y="585" fill="#dc2626" font-size="14">DMU定義</text>
+
+                    <!-- DB -> Product Recommendation -->
+                    <path d="M 1150 900 L 145 900 L 145 860" stroke="#9333ea" stroke-dasharray="5,2" marker-end="url(#one)" />
+                    <text x="200" y="890" fill="#dc2626" font-size="14">レコメンド生成</text>
+                </g>
+            </svg>
+        </div>
+
+        <!-- Footer / Legend -->
+        <div class="bg-slate-50 p-6 md:p-10 border-t border-slate-200">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+                <div class="p-6 bg-white rounded-xl border-l-4 border-cyan-500 shadow-sm">
+                    <h3 class="font-bold text-cyan-800 text-lg mb-2">SPEEDAによるデータエンリッチ</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        外部の企業財務、業界ニュース、人事異動情報を自動取得。ターゲット企業の発見から、商談前の深い顧客理解をデータで支援します。
+                    </p>
+                </div>
+                <div class="p-6 bg-white rounded-xl border-l-4 border-purple-600 shadow-sm">
+                    <h3 class="font-bold text-purple-800 text-lg mb-2">Databricksによる予測・自動化</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        全システムのデータを統合し、リードの有望度、案件の成約確率、LTV、さらには「次に行うべきアクション」をAIが予測し営業にフィードバックします。
+                    </p>
+                </div>
+            </div>
+            <div class="mt-8 text-center">
+                <p class="text-slate-400 text-[10px] md:text-xs italic">
+                    ※ 本ドキュメントはレスポンシブ対応のスタンドアロンHTMLです。ブラウザの幅に合わせて自動調整されます。
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
